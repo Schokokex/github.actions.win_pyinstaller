@@ -1,0 +1,24 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: apt udpate && apt install -y python3-pip && pip3 install PyInstaller
+    
+    - uses: actions/checkout@v2
+    - run: cd src && pyi-makespec main.py
+    
+    - uses: JackMcKew/pyinstaller-action-windows@main
+      with:
+        path: src
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-exe
+        path: src/dist/windows # https://github.com/JackMcKew/pyinstaller-action-windows/blob/main/entrypoint.sh
