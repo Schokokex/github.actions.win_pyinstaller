@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: apt udpate && apt install -y python3-pip && pip3 install PyInstaller
+    - run: apt update && apt install -y python3-pip && pip3 install PyInstaller
     
     - uses: actions/checkout@v2
     - run: cd src && pyi-makespec main.py
